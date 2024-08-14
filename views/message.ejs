@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin message</title>
+    <link href="../assets/img/logo.png" rel="icon" />
+
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Back Button -->
+    <div class="pt-4 px-4">
+        <a href="./" class="flex items-center text-gray-600 hover:text-gray-800">
+            <div class="bg-orange-500 rounded-full p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </div>
+
+        </a>
+    </div>
+
+
+    <div class="space-y-4 max-w-4xl w-full mx-auto pt-10 px-4 md:px-0">
+        <% if (messages && messages.length> 0) { %>
+            <% messages.forEach(function(message) { %>
+                <div class="bg-white shadow-lg rounded-lg p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <div>
+                            <span class="font-semibold text-lg text-gray-800">
+                                <%= message.name %>
+                            </span>
+                            <div class="text-sm text-gray-600">
+                                <%= message.number %>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-600">
+                            <%= message.date %>
+                        </span>
+                    </div>
+                    <div class="text-gray-700">
+                        <p>
+                            <%= message.message %>
+                        </p>
+                    </div>
+                </div>
+                <% }); %>
+                    <% } else { %>
+                        <h2 class="text-center">No messages available</h2>
+                        <% } %>
+    </div>
+</body>
+
+
+
+
+
+
+
+</html>

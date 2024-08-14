@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Description</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Favicons -->
+  <link href="/assets/img/logo.png" rel="icon" />
+  <link href="/assets/img/logo.png" rel="apple-touch-icon" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i"
+    rel="stylesheet" />
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet" />
+
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+  <style>
+    .image-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 75%;
+      /* Adjust this value to your desired aspect ratio */
+      overflow: hidden;
+    }
+
+    .image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 85%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="logo" style="display: flex; align-items: center">
+        <a href="/" style="display: flex; align-items: center; text-decoration: none">
+          <img src="../assets/img/logo.png" alt="Ram Creations Logo" style="max-width: 100%; height: auto" />
+          <h3
+            style="color: red; margin-left: 10px; margin-top: 5px; font-weight:700 ; font-size: 28px; letter-spacing: 1px;">
+            Ram Creations
+          </h3>
+        </a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="../">Home</a></li>
+          <li><a class="nav-link scrollto" href="../#about">About Us</a></li>
+          <li><a class="nav-link scrollto" href="../#services">Services</a></li>
+          <li>
+            <a class="nav-link scrollto" href="../#pricing">Our Offerings</a>
+          </li>
+
+          <li><a class="nav-link scrollto" href="../#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+  <!-- End Header -->
+
+
+  <!-- ======= Portfolio Details Section ======= -->
+  <section id="portfolio-details" class="portfolio-details">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-8">
+          <div class="portfolio-details-slider swiper">
+            <div class="swiper-wrapper align-items-center">
+              <% if (data && data.length> 0) { %>
+                <% data.forEach(data=> { %>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img class="img-fluid" src="<%= data.links %>" alt="" />
+                    </div>
+                  </div>
+                  <% }) %>
+                    <% } else { %>
+                      <!-- Default images if no data is available -->
+                      <div class="swiper-slide">
+                        <div class="image-container">
+                          <img class="img-fluid" src="/assets/img/portfolio/portfolio-1.jpg" alt="" />
+                        </div>
+                      </div>
+
+                      <div class="swiper-slide">
+                        <div class="image-container">
+                          <img class="img-fluid" src="/assets/img/portfolio/portfolio-2.jpg" alt="" />
+                        </div>
+                      </div>
+
+                      <div class="swiper-slide">
+                        <div class="image-container">
+                          <img class="img-fluid" src="/assets/img/portfolio/portfolio-3.jpg" alt="" />
+                        </div>
+                      </div>
+                      <% } %>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="portfolio-info">
+            <div class="card">
+              <div class="card-header">
+                <h2>
+                  <%= link.title %>
+                </h2>
+
+
+                <div class="price">
+                  ₹ <%= link.amount %>
+                </div>
+
+                <div class="duration">
+                  <a href="index.ejs#contact">
+                    For 1 Day of Shoot
+                    <br />
+                    <span style="color: red;">(Contact Us for Full Pricelist)</span>
+                  </a>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button id="sendEnquiry" class="btn enquiry">Send Enquiry</button>
+                <div id="enquiryModal" class="modal">
+                  <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <form id="enquiryForm" action="/contact" method="POST">
+                      <h2>
+                        <%= link.title %> Enquiry Form
+                      </h2>
+
+                      <label for="name">Name:</label>
+                      <input type="text" id="name" name="name" required>
+
+                      <label for="number">Phone Number:</label>
+                      <input type="number" id="number" name="number" required>
+
+                      <label for="subject">PhotoGraphy Preference:</label>
+                      <input type="text" id="subject" name="subject" value="<%= link.title %>">
+                      <br />
+                      <br />
+                      <button class="send" type="submit">Submit</button>
+                    </form>
+
+                  </div>
+
+                </div>
+                <button class="btn call" onclick="makePhoneCall()">Call/Chat</button>
+
+              </div>
+              <div class="portfolio-description">
+                <p>
+                  <%= link.description %>
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+  </section>
+  <!-- End Portfolio Details Section -->
+
+
+  <div class="text-center mb-3 pb-3">
+    <h1 class="text-primary text-uppercase" style="letter-spacing: 5px; font-size: 20px;">
+      Photos Gallery
+    </h1>
+
+  </div>
+
+  <div class="masonry">
+    <% if (data && data.length> 0) { %>
+      <% data.forEach(data=> { %>
+        <div class="item">
+          <img src="<%= data.links %>" alt="" class="clickable-image" style="width: 320px;">
+        </div>
+        <% }) %>
+          <% } else { %>
+            <h2 class="text-center">No data available</h2>
+            <% } %>
+  </div>
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
+
+  <!-- Packages Start -->
+  <div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+      <div class="text-center mb-3 pb-3">
+        <h1 class="text-primary text-uppercase" style="letter-spacing: 5px; font-size: 20px;">
+          Photos Gallery
+        </h1>
+
+      </div>
+      <div class="row">
+
+        <div class="flex flex-wrap -m-1">
+          <% if (data && data.length> 0) { %>
+            <% data.forEach(data=> { %>
+              <div class="p-1 w-1/4 sm:w-1/2 md:w-1/4">
+                <!-- Apply object-cover to ensure the image covers the div and the fixed height -->
+                <img src="<%= data.links %>" alt="" style="height: 200px"
+                  class="w-full object-cover transition duration-300 transform hover:scale-110 hover:grayscale hover:opacity-70 cursor-pointer">
+              </div>
+              <% }) %>
+                <% } else { %>
+                  <h2 class="text-center">No data available</h2>
+                  <% } %>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+  </div>
+  <!-- Packages End -->
+  <h1 class="text-primary text-center text-uppercase mt-5"
+    style="letter-spacing: 5px; font-size: 20px; padding-bottom: 10px;">
+    Video Gallery
+  </h1>
+
+
+  <div class="video-container">
+    <iframe class="responsive-iframe" src="https://www.youtube.com/embed/<%=link.youtubelink%>?autoplay=1"
+      allowfullscreen="true" allow="autoplay;"></iframe>
+  </div>
+
+
+
+  </main>
+  <!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-links" style=" 
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+            ">
+          <h4>Our Social Networks</h4>
+          <h2>Connect with us</h2>
+
+          <div class="social-links mt-3">
+            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://www.instagram.com/ramcreationphotography12?igsh=MzNlNGNkZWQ4Mg==" class="instagram"><i
+                class="bx bxl-instagram"></i></a>
+            <a href="https://youtube.com/@ramcreationbilaspur9392?si=i9vptm2pXtcXBPtg" class="google-plus"><i
+                class="bx bxl-youtube"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+
+  <script>
+    function makePhoneCall() {
+      window.location.href = "tel:7441180339";
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var imageModal = document.getElementById("imageModal");
+      var modalImg = document.getElementById("img01");
+      var captionText = document.getElementById("caption");
+      var closeButton = document.querySelector('.close'); // Get the close button
+
+      document.querySelectorAll('.clickable-image').forEach(img => {
+        img.onclick = function () {
+          imageModal.style.display = "block";
+          modalImg.src = this.src;
+          captionText.innerHTML = this.alt;
+        }
+      });
+
+      closeButton.onclick = function () {
+        imageModal.style.display = "none";
+      }
+
+      // Close the modal if the user clicks anywhere outside the image
+      window.onclick = function (event) {
+        if (event.target == imageModal) {
+          imageModal.style.display = "none";
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/js/main.js"></script>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var modal = document.getElementById('imageModal');
+    var modalImg = document.getElementById('img01');
+    var captionText = document.getElementById('caption');
+    var images = document.querySelectorAll('.clickable-image');
+    var closeButton = document.querySelector('.close');
+
+    // Function to open the modal
+    function openModal(src, alt) {
+      modal.style.display = 'block';
+      modalImg.src = src;
+      captionText.textContent = alt;
+    }
+
+    // Adding click event to all images
+    images.forEach(img => {
+      img.addEventListener('click', function () {
+        openModal(this.src, this.alt);
+      });
+    });
+
+    // Close the modal when the close button is clicked
+    closeButton.addEventListener('click', function () {
+      modal.style.display = 'none';
+    });
+
+    // Close the modal if the user clicks outside the image
+    window.addEventListener('click', function (event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+</html>
